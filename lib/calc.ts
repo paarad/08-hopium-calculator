@@ -31,5 +31,20 @@ export function capLossForCompute(lossPct: number): number {
 
 export function baseDosePerDay(lossPct: number): number {
   const capped = capLossForCompute(lossPct);
-  return Math.max(0, capped * MEME_MULTIPLIER);
+  const rawDose = Math.max(0, capped * MEME_MULTIPLIER);
+  
+  // Round to cleaner, more satisfying numbers
+  if (rawDose < 10) {
+    // For small doses, round to 0.5
+    return Math.round(rawDose * 2) / 2;
+  } else if (rawDose < 50) {
+    // For medium doses, round to whole numbers
+    return Math.round(rawDose);
+  } else if (rawDose < 200) {
+    // For larger doses, round to nearest 5
+    return Math.round(rawDose / 5) * 5;
+  } else {
+    // For very large doses, round to nearest 10
+    return Math.round(rawDose / 10) * 10;
+  }
 } 

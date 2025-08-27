@@ -62,10 +62,17 @@ export async function fetchCopingMessage(input: {
 
 export function localCopingMessage(lossPct: number, token: string | undefined, doseDisplay: string): string {
 	const line = cannedLines[Math.floor(Math.random() * cannedLines.length)];
+	console.log("=== LOCAL MESSAGE DEBUG ===");
 	console.log("Original token:", token);
+	console.log("Token type:", typeof token);
+	console.log("Token length:", token?.length);
 	const formattedToken = token ? (token.startsWith('$') ? `$${token.slice(1).toUpperCase()}` : `$${token.toUpperCase()}`) : "$BAG";
 	console.log("Formatted token:", formattedToken);
-	return line
+	console.log("Selected line:", line);
+	const finalMessage = line
 		.replace("{TOKEN}", formattedToken)
 		.replace("{DOSE}", doseDisplay);
+	console.log("Final message:", finalMessage);
+	console.log("=== END DEBUG ===");
+	return finalMessage;
 } 
