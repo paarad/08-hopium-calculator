@@ -12,20 +12,11 @@ export async function POST(req: NextRequest) {
 			timeframe: "hour" | "day" | "week";
 		};
 
-		console.log("=== API ROUTE DEBUG ===");
-		console.log("API - Original token:", token);
-		console.log("API - Token type:", typeof token);
-		console.log("API - Token length:", token?.length);
 		const formattedToken = token ? (token.startsWith('$') ? `$${token.slice(1).toUpperCase()}` : `$${token.toUpperCase()}`) : "$BAG";
-		console.log("API - Formatted token:", formattedToken);
-		console.log("API - Token starts with $:", token?.startsWith('$'));
-		console.log("API - Token slice(1):", token?.slice(1));
-		console.log("API - Token toUpperCase():", token?.toUpperCase());
 
 		// 80% chance to use canned lines (more degen energy)
 		// 20% chance to try AI (if available)
 		const useCanned = Math.random() < 0.8;
-		console.log("API - Using canned lines:", useCanned);
 
 		if (!useCanned) {
 			const apiKey = process.env.OPENAI_API_KEY;
@@ -58,13 +49,9 @@ export async function POST(req: NextRequest) {
 		}
 
 		// Use canned lines (either by choice or as fallback)
-		const selectedLine = cannedLines[Math.floor(Math.random() * cannedLines.length)];
-		console.log("API - Selected line:", selectedLine);
-		const message = selectedLine
+		const message = cannedLines[Math.floor(Math.random() * cannedLines.length)]
 			.replace("{TOKEN}", formattedToken)
 			.replace("{DOSE}", dose);
-		console.log("API - Final message:", message);
-		console.log("=== END API DEBUG ===");
 		return NextResponse.json({ message });
 	} catch {
 		return NextResponse.json({ message: "Keep breathing, anon. Better days ahead." }, { status: 200 });
