@@ -8,7 +8,7 @@ export type Dose = {
   family: DoseFamily;
 };
 
-export const MEME_MULTIPLIER = 0.1337;
+export const MEME_MULTIPLIER = 0.5; // Balanced multiplier for satisfying but realistic doses
 
 export function clamp(value: number, min: number, max: number): number {
   if (Number.isNaN(value)) return min;

@@ -65,7 +65,7 @@ export default function HopiumForm() {
 			const per = scalePerTimeframe(base, timeframe);
 			let message: string;
 			if (lossPct === 0) {
-				message = "No Hopium needed. You’re euphoric. 🎉";
+				message = "No Hopium needed. You're euphoric. 🎉";
 			} else {
 				const doseDisplay = formatDoseDisplay(per, unit, timeframe);
 				message = await fetchCopingMessage({
@@ -150,7 +150,7 @@ export default function HopiumForm() {
 						step="0.01"
 						value={initial}
 						onChange={(e) => setInitial(e.target.value)}
-						className="border rounded-md px-3 py-2"
+						className="border rounded-md px-3 py-2 transition-colors focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
 						placeholder="1000"
 					/>
 				</div>
@@ -162,7 +162,7 @@ export default function HopiumForm() {
 						step="0.01"
 						value={current}
 						onChange={(e) => setCurrent(e.target.value)}
-						className="border rounded-md px-3 py-2"
+						className="border rounded-md px-3 py-2 transition-colors focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
 						placeholder="200"
 					/>
 				</div>
@@ -172,7 +172,7 @@ export default function HopiumForm() {
 						type="text"
 						value={token}
 						onChange={(e) => setToken(e.target.value)}
-						className="border rounded-md px-3 py-2"
+						className="border rounded-md px-3 py-2 transition-colors focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
 						placeholder="$XYZ"
 					/>
 				</div>
@@ -181,7 +181,7 @@ export default function HopiumForm() {
 				<button
 					onClick={computeAndSet}
 					disabled={!validNumbers || working}
-					className="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium disabled:opacity-50"
+					className="inline-flex items-center rounded-md border px-6 py-3 text-sm font-medium transition-all duration-200  active:scale-95 cursor-pointer hover:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-gray-300 disabled:hover:shadow-none disabled:active:scale-100"
 				>
 					{working ? "Calculating..." : "Calculate my dose"}
 				</button>
